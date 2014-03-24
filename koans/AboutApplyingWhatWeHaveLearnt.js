@@ -66,7 +66,7 @@ describe("About Applying What We Have Learnt", function() {
         if (next % 3 === || next % 5 === 0) {
             return acc + next;
         } return acc;
-    }); // This would be cleaner as filter/filter/sum but this is faster.
+    }, 0); // This would be cleaner as filter/filter/sum but this is faster.
 
     expect(233168).toBe(sum);
   });
@@ -81,15 +81,24 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    var ingredientCount = { "{ingredient name}": 0 };
+    var ingredientCount = {};
 
-    /* chain() together map(), flatten() and reduce() */
+    _(products).chain()
+        .map(function (product) { return product.ingredients })
+        .flatten()
+        .forEach(function (ingredient) {
+            if (ingredient in ingredientCount) {
+                ingredientCount[ingredient] += 1;
+            } else {
+                ingredientCount[ingredient] = 1;
+            }
+        });
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
