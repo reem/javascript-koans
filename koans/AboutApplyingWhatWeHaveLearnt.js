@@ -40,7 +40,7 @@ describe("About Applying What We Have Learnt", function() {
     var productsICanEat = _(products).filter(function(product) {
         return !(product.containsNuts) &&
             _(product.ingredients).all(
-                function (ingredient) { return ingredient !== "mushrooms"; })
+                function (ingredient) { return ingredient !== "mushrooms"; });
     });
 
     expect(productsICanEat.length).toBe(1);
@@ -63,7 +63,7 @@ describe("About Applying What We Have Learnt", function() {
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
     var sum = _(_.range(1, 1000)).reduce(function(acc, next) {
-        if (next % 3 === || next % 5 === 0) {
+        if (next % 3 === 0 || next % 5 === 0) {
             return acc + next;
         } return acc;
     }, 0); // This would be cleaner as filter/filter/sum but this is faster.
@@ -81,14 +81,14 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(2);
+    expect(ingredientCount.mushrooms).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = {};
 
     _(products).chain()
-        .map(function (product) { return product.ingredients })
+        .map(function (product) { return product.ingredients; })
         .flatten()
         .forEach(function (ingredient) {
             if (ingredient in ingredientCount) {
@@ -98,7 +98,7 @@ describe("About Applying What We Have Learnt", function() {
             }
         });
 
-    expect(ingredientCount['mushrooms']).toBe(2);
+    expect(ingredientCount.mushrooms).toBe(2);
   });
 
   /*********************************************************************************/
